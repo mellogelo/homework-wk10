@@ -22,6 +22,12 @@ function start() {
         type: "input",
         message: "What is employee's email?",
         name: "email"
+    },
+    {
+        type: "list",
+        message: "What is employee's title?",
+        name: "title",
+        choices: ["Engineer", "Intern", "Manager"]
     }
     ])
     .then((data) => {
@@ -31,3 +37,50 @@ function start() {
         email = data.email;
     })
 };
+
+switch (title){
+    case "Manager":
+        await inquirer.prompt([
+            {
+                type: "input",
+                message: "What is your Manager's Office Number?",
+                name: "officeNumber"
+            }
+        ])
+        .then((data) => {
+            const manager = new Manager(name, id, email, data.officeNumber);
+
+            teamMember = fs.readFileSync("..Develop/templates/manager.html")
+        });
+        break;
+
+        case "Engineer":
+            await inquirer.prompt([
+                {
+                    type: "input",
+                    message: "What is your Engineer's GitHub?",
+                    name: "github"
+                }
+            ])
+            .then((data) => {
+                const engineer = new Engineer(name, id, email, data.github);
+    
+                teamMember = fs.readFileSync("..Develop/templates/engineer.html")
+            })
+            break;
+   
+        
+        case "Intern":
+            await inquirer.prompt([
+                {
+                    type: "input",
+                    message: "What is your school did your Intern go to?",
+                    name: "school"
+                }
+            ])
+            .then((data) => {
+                const intern = new Intern(name, id, email, data.school);
+    
+                teamMember = fs.readFileSync("..Develop/templates/intern.html")
+            })
+}
